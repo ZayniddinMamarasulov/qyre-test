@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qyre_test/features/home/presentation/widgets/availability_list.dart';
 import 'package:qyre_test/features/home/presentation/widgets/complete_list.dart';
+import 'package:qyre_test/features/home/presentation/widgets/production_list.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: Text(
+          title: const Text(
             "My Availability",
             style: TextStyle(color: Colors.black),
           ),
@@ -18,8 +19,10 @@ class HomePage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              const SizedBox(height: 12),
               AvailabilityList(),
               CompleteCards(),
+              ProductionList()
             ],
           ),
         ));
