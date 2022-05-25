@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qyre_test/features/home/presentation/widgets/availability_list.dart';
+import 'package:qyre_test/features/home/presentation/widgets/complete_list.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               AvailabilityList(),
+              CompleteCards(),
             ],
           ),
         ));
