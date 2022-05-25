@@ -13,15 +13,36 @@ class AvailabilityItem extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       width: 90,
-      height: 120,
+      height: 180,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("TODAY", style: TextStyle(color: Color(0xff9C9C9C))),
+          Text("TODAY",
+              style: TextStyle(
+                fontSize: 12,
+                color: Color(0xff9C9C9C),
+                fontWeight: FontWeight.w300,
+              )),
           SizedBox(height: 4.0),
-          Text("Mon", style: TextStyle(color: Colors.white)),
-          Text("Oct", style: TextStyle(color: Colors.white)),
-          Text("18", style: TextStyle(color: Colors.white)),
+          Text("Mon",
+              style: TextStyle(
+                height: 1.4,
+                fontSize: 14,
+                color: Colors.white,
+                fontWeight: FontWeight.w200,
+              )),
+          Text("Oct",
+              style: TextStyle(
+                height: 1.4,
+                color: Colors.white,
+                fontSize: 12,
+              )),
+          Text("18",
+              style: TextStyle(
+                  height: 1.4,
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold)),
           SizedBox(height: 24),
           buildDot(Color(0xffEC4E27))
         ],
