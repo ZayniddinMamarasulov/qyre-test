@@ -20,7 +20,7 @@ class CompleteItem extends StatelessWidget {
         color: Color(0xffF0F2F5),
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.only(right: 14),
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 20),
       width: 300,
       height: 172,

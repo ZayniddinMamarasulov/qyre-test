@@ -11,6 +11,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          elevation: 0,
           backgroundColor: Colors.white,
           title: const Text(
             "My Availability",
@@ -18,14 +19,19 @@ class HomePage extends StatelessWidget {
           ),
         ),
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(height: 12),
-              AvailabilityList(),
-              CompleteCards(),
-              ProductionList(),
-              CardsList()
-            ],
+          child: Container(
+            padding: EdgeInsets.all(8),
+            child: Column(
+              children: [
+                AvailabilityList(),
+                SizedBox(height: 16),
+                CompleteCards(),
+                SizedBox(height: 16),
+                ProductionList(),
+                SizedBox(height: 16),
+                CardsList()
+              ],
+            ),
           ),
         ));
   }

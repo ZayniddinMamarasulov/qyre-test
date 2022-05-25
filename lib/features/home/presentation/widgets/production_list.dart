@@ -8,7 +8,7 @@ class ProductionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.only(bottom: 10),
       width: double.infinity,
       height: 200,
       child: Column(

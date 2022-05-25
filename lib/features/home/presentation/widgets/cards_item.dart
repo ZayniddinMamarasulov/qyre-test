@@ -13,7 +13,7 @@ class CardsItem extends StatelessWidget {
         color: Color(int.parse(cardDto.color)),
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
-      margin: const EdgeInsets.all(8),
+      margin: const EdgeInsets.only(right: 16),
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 20),
       width: 120,
       height: 172,

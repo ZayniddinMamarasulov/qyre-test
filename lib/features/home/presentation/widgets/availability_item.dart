@@ -6,7 +6,7 @@ class AvailabilityItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(4.0),
+      margin: const EdgeInsets.only(right: 8.0),
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
       decoration: const BoxDecoration(
         color: Colors.black,
