@@ -20,6 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Set<ItemContext>? _itemsContexts;
   BehaviorSubject<ScrollNotification>? _streamController;
+  bool _isTopListVisible = true;
 
   final List<Widget> widgets = [
     AvailabilityList(),
@@ -60,26 +61,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: PreferredSize(
-          preferredSize: Size(
-              MediaQuery.of(context).size.width, AppBar().preferredSize.height),
-          child: Container(
-            child: ClipRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                child: AppBar(
-                  shadowColor: Colors.red,
-                  elevation: 0,
-                  backgroundColor: Color(0xCCFFFFFF),
-                  title: const Text(
-                    "My Availability",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
+        appBar: buildHomeAppBar(),
         body: NotificationListener<ScrollNotification>(
           onNotification: (ScrollNotification scroll) {
             if (!_streamController!.isClosed) {
@@ -88,7 +70,8 @@ class _HomePageState extends State<HomePage> {
             return false;
           },
           child: Container(
-            padding: const EdgeInsets.all(8),
+            padding:
+                const EdgeInsets.only(left: 12, top: 12, right: 12, bottom: 0),
             child: ListView.builder(
                 itemCount: widgets.length,
                 itemBuilder: (BuildContext context, int index) {
@@ -100,6 +83,58 @@ class _HomePageState extends State<HomePage> {
                 }),
           ),
         ));
+  }
+
+  PreferredSizeWidget buildHomeAppBar() {
+    return PreferredSize(
+      preferredSize: Size(
+          MediaQuery.of(context).size.width, AppBar().preferredSize.height),
+      child: Container(
+        child: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+            child: AppBar(
+              shadowColor: Colors.red,
+              elevation: 0,
+              backgroundColor: const Color(0xCCFFFFFF),
+              title: Container(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "My Availability",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    buildAppBarList()
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildAppBarList() {
+    if (!_isTopListVisible) {
+      return Container(
+        height: 60,
+        child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: 20,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                width: 30,
+                height: 15,
+                color: Colors.red,
+              );
+            }),
+      );
+    } else {
+      return Container();
+    }
   }
 
   void _onScroll(List<ScrollNotification> notifications) {
@@ -125,8 +160,16 @@ class _HomePageState extends State<HomePage> {
       final double widgetHeight = MediaQuery.of(context).size.height * 0.2;
 
       if (item.id == 1) {
-        if (deltaTop + widgetHeight - widgetHeight / 4 < 0) {
+        print("deltaTop = $deltaTop");
+        if (deltaTop + widgetHeight / 6 < 0) {
           print("------- DONE");
+          setState(() {
+            _isTopListVisible = false;
+          });
+        } else {
+          setState(() {
+            _isTopListVisible = true;
+          });
         }
       }
     });
