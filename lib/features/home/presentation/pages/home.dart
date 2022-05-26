@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:qyre_test/features/home/presentation/widgets/availability_list.dart';
@@ -57,12 +59,25 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.white,
-          title: const Text(
-            "My Availability",
-            style: TextStyle(color: Colors.black),
+        extendBodyBehindAppBar: true,
+        appBar: PreferredSize(
+          preferredSize: Size(
+              MediaQuery.of(context).size.width, AppBar().preferredSize.height),
+          child: Container(
+            child: ClipRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+                child: AppBar(
+                  shadowColor: Colors.red,
+                  elevation: 0,
+                  backgroundColor: Color(0xCCFFFFFF),
+                  title: const Text(
+                    "My Availability",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+            ),
           ),
         ),
         body: NotificationListener<ScrollNotification>(

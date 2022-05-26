@@ -10,7 +10,7 @@ class ProductionList extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       width: double.infinity,
-      height: 200,
+      height: 220,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,

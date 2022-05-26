@@ -14,7 +14,7 @@ class ProductionItem extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(4)),
       ),
       width: double.infinity,
-      margin: EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
