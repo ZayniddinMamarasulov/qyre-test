@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../features/home/domain/dto/available_dto.dart';
@@ -21,5 +20,10 @@ class Utils {
         color: color,
       ),
     );
+  }
+
+  double roundDouble(double value, int places) {
+    num mod = pow(10.0, places);
+    return ((value * mod).round().toDouble() / mod);
   }
 }

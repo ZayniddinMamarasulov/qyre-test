@@ -11,6 +11,9 @@ class AvailableDto {
     AvailableDto("Thu Oct 21", AvailabilityStatus.BUSY),
     AvailableDto("Fri Oct 22", AvailabilityStatus.NOT_SET),
     AvailableDto("Sat Oct 23", AvailabilityStatus.NOT_SET),
+    AvailableDto("Sun Oct 24", AvailabilityStatus.BUSY),
+    AvailableDto("Mon Oct 25", AvailabilityStatus.NOT_SET),
+    AvailableDto("Tue Oct 26", AvailabilityStatus.FREE),
   ];
 }
 

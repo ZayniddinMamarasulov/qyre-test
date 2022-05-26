@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -79,52 +80,51 @@ class _HomePageState extends State<HomePage> {
           child: Container(
             padding:
                 const EdgeInsets.only(left: 12, top: 12, right: 12, bottom: 0),
-            child: ListView.builder(
-                shrinkWrap: true,
-                physics: AlwaysScrollableScrollPhysics(),
-                itemCount: widgets.length,
-                itemBuilder: (BuildContext context, int index) {
-                  if (index == 0) {
-                    _itemsContexts?.add(ItemContext(
-                      context: context,
-                      id: index,
-                    ));
-                  }
-                  return widgets[index];
-                }),
+            child: Stack(
+              children: [
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics: AlwaysScrollableScrollPhysics(),
+                    itemCount: widgets.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (index == 0) {
+                        _itemsContexts?.add(ItemContext(
+                          context: context,
+                          id: index,
+                        ));
+                      }
+                      return widgets[index];
+                    }),
+                Positioned(
+                  child: buildAppBarList(),
+                  left: 0,
+                  top: AppBar().preferredSize.height * 1.5,
+                ),
+              ],
+            ),
           ),
         ));
   }
 
   PreferredSizeWidget buildHomeAppBar() {
-    double appBarHeight = AppBar().preferredSize.height;
-    if (!_isTopListVisible) {
-      appBarHeight = 96;
-    }
-
+    double barSize = AppBar().preferredSize.height;
     return PreferredSize(
-      preferredSize: Size(MediaQuery.of(context).size.width, appBarHeight),
-      child: Container(
-        child: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-            child: AppBar(
-              shadowColor: Colors.red,
-              elevation: 0,
-              backgroundColor: const Color(0xCCFFFFFF),
-              title: Container(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "My Availability",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    buildAppBarList()
-                  ],
-                ),
+      preferredSize: Size(MediaQuery.of(context).size.width, barSize),
+      child: ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+          child: AppBar(
+            centerTitle: false,
+            automaticallyImplyLeading: false,
+            elevation: 0,
+            backgroundColor: const Color(0xCCFFFFFF),
+            title: Container(
+              padding: const EdgeInsets.all(4.0),
+              child: Column(
+                children: const [
+                  Text("My Availability",
+                      style: TextStyle(color: Colors.black)),
+                ],
               ),
             ),
           ),
@@ -136,11 +136,11 @@ class _HomePageState extends State<HomePage> {
   Widget buildAppBarList() {
     if (!_isTopListVisible) {
       return Column(
-        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const SizedBox(height: 12),
           Container(
-            height: 96,
+            color: const Color(0xFFFFFFFF),
+            height: 80,
+            width: MediaQuery.of(context).size.width,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: AvailableDto.days.length,
@@ -177,13 +177,18 @@ class _HomePageState extends State<HomePage> {
 
       final double widgetHeight = MediaQuery.of(context).size.height * 0.2;
 
-      // print("deltaTop = $deltaTop");
-      if (deltaTop + widgetHeight / 6 < 0) {
-        // print("------- DONE");
+      print("deltaTop = ${deltaTop.truncate()}");
+      // print("oldValue = $oldValue");
+      // print("------------");
+
+      // if (deltaTop.truncate() + widgetHeight / 12 < 0) {
+      if (deltaTop.truncate() < 0) {
         if (_isTopListVisible) {
           setState(() {
             _isTopListVisible = false;
             print("HIDDEN");
+            print("HIDDEN - deltaTop = ${deltaTop.truncate()}");
+            print("-----------");
           });
         }
       } else {
@@ -191,8 +196,10 @@ class _HomePageState extends State<HomePage> {
           setState(() {
             _isTopListVisible = true;
             print("VISIBLE");
+            print("VISIBLE - deltaTop = ${deltaTop.truncate()}");
           });
         }
+        // }
       }
     });
   }
