@@ -17,7 +17,10 @@ class ProductionList extends StatelessWidget {
         children: [
           const Text(
             "Today's productions",
-            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
+            style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 18,
+                color: Color(0xff444444)),
           ),
           const SizedBox(height: 12),
           Expanded(
