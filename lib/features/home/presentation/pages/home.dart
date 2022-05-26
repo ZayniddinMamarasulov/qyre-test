@@ -68,42 +68,45 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: buildHomeAppBar(),
-        body: NotificationListener<ScrollNotification>(
-          onNotification: (ScrollNotification scroll) {
-            if (!_streamController!.isClosed) {
-              _streamController?.add(scroll);
-            }
-            return false;
-          },
-          child: Container(
-            padding:
-                const EdgeInsets.only(left: 12, top: 12, right: 12, bottom: 0),
-            child: Stack(
-              children: [
-                ListView.builder(
-                    shrinkWrap: true,
-                    physics: AlwaysScrollableScrollPhysics(),
-                    itemCount: widgets.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      if (index == 0) {
-                        _itemsContexts?.add(ItemContext(
-                          context: context,
-                          id: index,
-                        ));
-                      }
-                      return widgets[index];
-                    }),
-                Positioned(
-                  child: buildAppBarList(),
-                  left: 0,
-                  top: AppBar().preferredSize.height * 1.5,
-                ),
-              ],
-            ),
+      extendBodyBehindAppBar: true,
+      appBar: buildHomeAppBar(),
+      body: NotificationListener<ScrollNotification>(
+        onNotification: (ScrollNotification scroll) {
+          if (!_streamController!.isClosed) {
+            _streamController?.add(scroll);
+          }
+          return false;
+        },
+        child: Container(
+          padding:
+              const EdgeInsets.only(left: 12, top: 12, right: 12, bottom: 0),
+          child: Stack(
+            children: [
+              ListView.builder(
+                  shrinkWrap: true,
+                  physics: AlwaysScrollableScrollPhysics(),
+                  itemCount: widgets.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    if (index == 0) {
+                      _itemsContexts?.add(ItemContext(
+                        context: context,
+                        id: index,
+                      ));
+                    }
+                    return widgets[index];
+                  }),
+              Positioned(
+                child: buildAppBarList(),
+                left: 0,
+                top: Platform.isIOS
+                    ? AppBar().preferredSize.height * 1.4
+                    : AppBar().preferredSize.height * 1.2,
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   PreferredSizeWidget buildHomeAppBar() {
