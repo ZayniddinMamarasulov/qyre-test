@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:qyre_test/features/home/presentation/widgets/availability_list.dart';
 import 'package:qyre_test/features/home/presentation/widgets/cards_list.dart';
 import 'package:qyre_test/features/home/presentation/widgets/complete_list.dart';
+import 'package:qyre_test/features/home/presentation/widgets/my_job_offers.dart';
 import 'package:qyre_test/features/home/presentation/widgets/production_list.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -30,7 +31,8 @@ class _HomePageState extends State<HomePage> {
     ProductionList(),
     SizedBox(height: 16),
     CardsList(),
-    Container(height: 240, color: Colors.red)
+    SizedBox(height: 24),
+    MyJobOffers()
   ];
 
   @override
@@ -73,12 +75,16 @@ class _HomePageState extends State<HomePage> {
             padding:
                 const EdgeInsets.only(left: 12, top: 12, right: 12, bottom: 0),
             child: ListView.builder(
+                shrinkWrap: true,
+                physics: AlwaysScrollableScrollPhysics(),
                 itemCount: widgets.length,
                 itemBuilder: (BuildContext context, int index) {
-                  _itemsContexts?.add(ItemContext(
-                    context: context,
-                    id: index,
-                  ));
+                  if (index == 0) {
+                    _itemsContexts?.add(ItemContext(
+                      context: context,
+                      id: index,
+                    ));
+                  }
                   return widgets[index];
                 }),
           ),
@@ -159,16 +165,20 @@ class _HomePageState extends State<HomePage> {
 
       final double widgetHeight = MediaQuery.of(context).size.height * 0.2;
 
-      if (item.id == 1) {
-        print("deltaTop = $deltaTop");
-        if (deltaTop + widgetHeight / 6 < 0) {
-          print("------- DONE");
+      // print("deltaTop = $deltaTop");
+      if (deltaTop + widgetHeight / 6 < 0) {
+        // print("------- DONE");
+        if (_isTopListVisible) {
           setState(() {
             _isTopListVisible = false;
+            print("HIDDEN");
           });
-        } else {
+        }
+      } else {
+        if (!_isTopListVisible) {
           setState(() {
             _isTopListVisible = true;
+            print("VISIBLE");
           });
         }
       }

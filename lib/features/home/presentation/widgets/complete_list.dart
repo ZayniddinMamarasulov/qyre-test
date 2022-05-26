@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qyre_test/features/home/presentation/widgets/complete_item.dart';
 
-import '../../domain/entities/complete_dto.dart';
+import '../../domain/dto/complete_dto.dart';
 
 class CompleteCards extends StatelessWidget {
   const CompleteCards({Key? key}) : super(key: key);

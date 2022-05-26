@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qyre_test/features/home/domain/dto/available_dto.dart';
 import 'availability_item.dart';
 
 class AvailabilityList extends StatelessWidget {
@@ -6,13 +7,13 @@ class AvailabilityList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.2,
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.20,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: 10,
+          itemCount: AvailableDto.days.length,
           itemBuilder: (BuildContext context, int index) {
-            return AvailabilityItem();
+            return AvailabilityItem(AvailableDto.days[index]);
           }),
     );
   }

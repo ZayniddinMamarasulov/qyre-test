@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qyre_test/features/home/domain/entities/production_dto.dart';
+import 'package:qyre_test/features/home/domain/dto/production_dto.dart';
 
 class ProductionItem extends StatelessWidget {
   final ProductionDto productionDto;

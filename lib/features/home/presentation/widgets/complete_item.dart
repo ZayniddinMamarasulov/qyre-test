@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qyre_test/features/home/domain/entities/complete_dto.dart';
+
+import '../../domain/dto/complete_dto.dart';
 
 class CompleteItem extends StatelessWidget {
   final CompleteDto completeDto;

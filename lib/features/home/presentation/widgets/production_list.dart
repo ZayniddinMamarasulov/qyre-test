@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qyre_test/features/home/domain/entities/production_dto.dart';
+import 'package:qyre_test/features/home/domain/dto/production_dto.dart';
 import 'package:qyre_test/features/home/presentation/widgets/production_item.dart';
 
 class ProductionList extends StatelessWidget {
@@ -25,6 +25,8 @@ class ProductionList extends StatelessWidget {
           const SizedBox(height: 12),
           Expanded(
             child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
               scrollDirection: Axis.vertical,
               itemCount: ProductionDto.productionsList.length,
               itemBuilder: (BuildContext context, int index) {

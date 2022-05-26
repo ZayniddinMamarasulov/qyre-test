@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qyre_test/features/home/domain/entities/card_dto.dart';
+import 'package:qyre_test/features/home/domain/dto/card_dto.dart';
 
 class CardsItem extends StatelessWidget {
   final CardDto cardDto;
