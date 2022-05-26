@@ -81,7 +81,6 @@ class _HomePageState extends State<HomePage> {
                     context: context,
                     id: index,
                   ));
-
                   return widgets[index];
                 }),
           ),
@@ -108,17 +107,12 @@ class _HomePageState extends State<HomePage> {
       final double? deltaTop = vpOffset!.offset - scrollPosition!.pixels;
       final double? deltaBottom = deltaTop! + size!.height;
 
-      bool isInViewport = false;
+      final double widgetHeight = MediaQuery.of(context).size.height * 0.2;
 
-      isInViewport = (deltaTop >= 0.0 && deltaTop < vpHeight!);
-      if (!isInViewport) {
-        isInViewport = (deltaBottom! > 0.0 && deltaBottom < vpHeight!);
-      }
-
-      print(
-          '${item.id} --> offset: ${vpOffset.offset} -- VP?: ${isInViewport}');
       if (item.id == 1) {
-        print("bottom = $deltaTop");
+        if (deltaTop + widgetHeight - widgetHeight / 4 < 0) {
+          print("------- DONE");
+        }
       }
     });
   }
