@@ -7,9 +7,12 @@ import 'package:qyre_test/features/home/presentation/widgets/cards_list.dart';
 import 'package:qyre_test/features/home/presentation/widgets/complete_list.dart';
 import 'package:qyre_test/features/home/presentation/widgets/my_job_offers.dart';
 import 'package:qyre_test/features/home/presentation/widgets/production_list.dart';
+import 'package:qyre_test/features/home/presentation/widgets/starred_posts.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../../commons/compare_object.dart';
+import '../../domain/dto/available_dto.dart';
+import '../widgets/top_availability_item.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -32,7 +35,9 @@ class _HomePageState extends State<HomePage> {
     SizedBox(height: 16),
     CardsList(),
     SizedBox(height: 24),
-    MyJobOffers()
+    MyJobOffers(),
+    SizedBox(height: 24),
+    StarredPosts()
   ];
 
   @override
@@ -92,9 +97,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   PreferredSizeWidget buildHomeAppBar() {
+    double appBarHeight = AppBar().preferredSize.height;
+    if (!_isTopListVisible) {
+      appBarHeight = 96;
+    }
+
     return PreferredSize(
-      preferredSize: Size(
-          MediaQuery.of(context).size.width, AppBar().preferredSize.height),
+      preferredSize: Size(MediaQuery.of(context).size.width, appBarHeight),
       child: Container(
         child: ClipRect(
           child: BackdropFilter(
@@ -106,6 +115,7 @@ class _HomePageState extends State<HomePage> {
               title: Container(
                 padding: const EdgeInsets.all(12.0),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
@@ -125,18 +135,20 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildAppBarList() {
     if (!_isTopListVisible) {
-      return Container(
-        height: 60,
-        child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 20,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                width: 30,
-                height: 15,
-                color: Colors.red,
-              );
-            }),
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          const SizedBox(height: 12),
+          Container(
+            height: 96,
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: AvailableDto.days.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return TopAvailabilityItem(AvailableDto.days[index]);
+                }),
+          ),
+        ],
       );
     } else {
       return Container();

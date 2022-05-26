@@ -39,7 +39,7 @@ class AvailabilityItem extends StatelessWidget {
                     height: 1.4,
                     fontSize: 14,
                     color: Colors.white,
-                    fontWeight: FontWeight.w200,
+                    fontWeight: FontWeight.bold,
                   )),
               Text(day.date.split(" ")[1],
                   style: const TextStyle(
@@ -55,23 +55,12 @@ class AvailabilityItem extends StatelessWidget {
                       fontWeight: FontWeight.bold)),
               const SizedBox(height: 12),
               day.status != AvailabilityStatus.NOT_SET
-                  ? buildDot(Utils.getAvailabilityColor(day.status))
-                  : SizedBox()
+                  ? Utils.buildDot(Utils.getAvailabilityColor(day.status))
+                  : const SizedBox()
             ],
           ),
         ),
       ],
-    );
-  }
-
-  Widget buildDot(Color color) {
-    return Container(
-      width: 12,
-      height: 12,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: color,
-      ),
     );
   }
 }
